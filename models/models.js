@@ -14,13 +14,16 @@ var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
 exports.Quiz = Quiz;
 
 //Inicializa la base de datos y crea un registro si está vacía
-sequelize.sync().success(function() {
-	Quiz.count().success(function (count){
+sequelize.sync().then(function() {
+	Quiz.count().then(function (count){
 		if ( count === 0 ) {
+			Quiz.create({pregunta: '¿Cuál es la capital de Portugal?',
+						respuesta: 'Lisboa'
+						});
 			Quiz.create({pregunta: '¿Cuál es la capital de Italia?',
 						respuesta: 'Roma'
 						})
-			.success(function(){console.log('Base de datos inicializada')});
+			.then(function(){console.log('Base de datos inicializada')});
 		};
 	});
 });
