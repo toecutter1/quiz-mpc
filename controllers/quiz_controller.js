@@ -39,6 +39,22 @@ exports.index = function(req, res) {
 		 order: [["pregunta", "ASC"]]}).then(function(quizes) {
 			res.render('quizes/index.ejs', {quizes: quizes});	
 		})
-		console.log(search);
 	}
+};
+
+//GET /quizes/create Añadir preguntas
+
+exports.new = function(req, res) {
+	var quiz = models.Quiz.build( //crea objeto quiz
+		{pregunta: "Pregunta", respuesta: "Respuesta"}
+		);
+	res.render('quizes/new.ejs', {quiz: quiz});
+};
+//POST Quizes Create
+exports.create = function(req,res) {
+	var quiz = models.Quiz.build(req.body.quiz);
+	//Guarda en DB los datos pasados por el formulario /quizes/new
+	quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
+		res.redirect('/quizes');
+	})
 };
