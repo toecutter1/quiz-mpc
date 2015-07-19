@@ -1,4 +1,4 @@
 node_modules
 .env
-.quiz.sqlite
+quiz.sqlite
 npm-debug.log

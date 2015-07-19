@@ -1,14 +1,14 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var partials    = require('express-partials');
+var express =           require('express');
+var path =              require('path');
+var favicon =           require('serve-favicon');
+var logger =            require('morgan');
+var cookieParser =      require('cookie-parser');
+var bodyParser =        require('body-parser');
+var partials    =       require('express-partials');
+var methodOverride =    require('method-override');
+var routes =            require('./routes/index');
 
-var routes = require('./routes/index');
-var author = require('./routes/author');
-
+var author =            require('./routes/author');
 
 var app = express();
 
@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded( { extended: true } ));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
+app.use(methodOverride('_method'));
 
 app.use('/', routes);
 app.use('/author', author);
