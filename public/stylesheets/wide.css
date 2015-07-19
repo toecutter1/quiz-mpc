@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 body { background: #cdf; }
+=======
+body { background: #cff; }
+>>>>>>> aux
 
 #page-wrap:after { content: "Wide Layout"; }
 
 nav       { float: left; width: 15%; height: 200px ;}
-nav span  { margin: 0px 100px 0px 0px;}
+nav span  { margin: 0px 10px 0px 0px;}
+#ErrorMsgs {color: #161; font-size: smaller}
 section   { float: right; width: 80%; height: 200px ;}
 footer    { clear: both;  display: block; }
