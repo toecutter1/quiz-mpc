@@ -2,7 +2,8 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+nav span { margin: 0px 10px 0px 0px;}
+#ErrorMsgs {color: #f61; font: smaller;}
 a {
   color: #00B7FF;
 }
