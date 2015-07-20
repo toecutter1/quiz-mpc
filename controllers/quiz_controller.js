@@ -52,7 +52,7 @@ exports.new = function(req, res) {
 };
 //POST Quizes Create
 exports.create = function(req,res) {
-	var quiz = models.Quiz.build(req.body.quiz);
+	var quiz = models.Quiz.build( req.body.quiz ); 
 
 	//Guarda en DB los datos pasados por el formulario /quizes/new despues de validarlos en la DB
 
@@ -61,9 +61,9 @@ exports.create = function(req,res) {
 	.then(
 		function(err){
 			if (err){
-				res.render('/quizes/new', { quiz: quiz, errors: err.errors });
+				res.render('quizes/new', { quiz: quiz, errors: err.errors });
 				//res.render('/quizes/new', {quiz:quiz, errors: [] });
-			}else{
+			} else {
 				quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
 				res.redirect('/quizes');
 				})
@@ -96,11 +96,10 @@ exports.update = function(req, res){
 			}
 		}
 		);
-
 };
+
 //DELETE /quizes/:quizId
 exports.destroy = function(req, res){
-	console.log('Estoy en destroy')
 	req.quiz.destroy().then(function(){
 		res.redirect('/quizes');
 	}).catch(function(error){next(error)});
