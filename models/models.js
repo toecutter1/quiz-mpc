@@ -27,8 +27,18 @@ var sequelize = new Sequelize (DB_name, user, pwd,
 //Importa la estructura de tabla Quiz
 var quiz_path = path.join(__dirname, 'quiz');
 var Quiz =sequelize.import(quiz_path);
+//IMportar la estructura de Comment
+var comment_path = path.join(__dirname, 'comment');
+var Comment = sequelize.import(comment_path);
+
+//Establece relaciones entre Tabla Quiz y Comment
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
+
 //Exporta la definicion de la tabla Quiz
 exports.Quiz = Quiz;
+//Exporta la definición de la tabla Comment
+exports.Comment = Comment;
 
 //Inicializa la base de datos y crea un registro si está vacía
 sequelize.sync().then(function() {
