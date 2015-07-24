@@ -1,3 +1,12 @@
+//Midleware de control de acceso a zonas restringuidas
+exports.loginRequired = function(req, res, next){
+	if (req.session.user){
+		next();
+	} else {
+		res.redirect('/login');
+	}
+};
+
 //Get /login , formulario de  login
 
 exports.new = function(req, res){
