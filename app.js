@@ -7,6 +7,7 @@ var bodyParser =        require('body-parser');
 var partials    =       require('express-partials');
 var methodOverride =    require('method-override');
 var routes =            require('./routes/index');
+var session =           require('express-session');
 
 var author =            require('./routes/author');
 
@@ -21,10 +22,24 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( { extended: true } ));
-app.use(cookieParser());
+app.use(cookieParser('mpc'));
+app.use(session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 app.use(methodOverride('_method'));
+
+//Helpers dinamicos
+
+app.use(function(req, res, next){
+    //guardar path de session para despues de login
+    if (!req.path.match(/\/login|\/logout/)){
+        req.session.redir = req.path;
+    }
+        //hacer visible session en las vistas
+        res.locals.session = req.session;
+        next();
+});
+
 
 app.use('/', routes);
 app.use('/author', author);
