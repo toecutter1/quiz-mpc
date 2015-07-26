@@ -23,7 +23,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( { extended: true } ));
 app.use(cookieParser('mpc'));
-app.use(session());
+app.use(session({rolling: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 app.use(methodOverride('_method'));
@@ -40,6 +40,15 @@ app.use(function(req, res, next){
         next();
 });
 
+//Control expire cookie
+
+app.use(function(req, res, next){
+    if(req.session.user){
+        var timeSession = 120000;
+        req.session.cookie.expires = new Date(Date.now() + timeSession);
+    }
+    next();
+});
 
 app.use('/', routes);
 app.use('/author', author);
